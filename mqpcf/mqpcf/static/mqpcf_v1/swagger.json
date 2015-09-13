@@ -1,0 +1,1190 @@
+{
+  "info": {
+    "version": "1.0.0", 
+    "description": "Query MQ PCF", 
+    "title": "MQ PCF"
+  }, 
+  "paths": {
+    "/queue_status": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "MQQmanager", 
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/queue_status"
+              }, 
+              "type": "array"
+            }
+          }, 
+          "500": {
+            "description": "Unexpected error", 
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }, 
+        "tags": [
+          "queue"
+        ], 
+        "description": "get queues\n", 
+        "parameters": [
+          {
+            "required": true, 
+            "type": "string", 
+            "description": "The name of the qmgr to retreive", 
+            "name": "qmgr_name", 
+            "in": "query"
+          }, 
+          {
+            "required": false, 
+            "type": "string", 
+            "description": "queue name to query", 
+            "name": "name", 
+            "in": "query"
+          }
+        ], 
+        "summary": "Queue Status"
+      }
+    }, 
+    "/connection": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "MQConnection", 
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/connection"
+              }, 
+              "type": "array"
+            }
+          }, 
+          "500": {
+            "description": "Unexpected error", 
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }, 
+        "tags": [
+          "connection"
+        ], 
+        "description": "get connection\n", 
+        "parameters": [
+          {
+            "required": true, 
+            "type": "string", 
+            "description": "The name of the qmgr to retreive", 
+            "name": "qmgr_name", 
+            "in": "query"
+          }, 
+          {
+            "required": false, 
+            "type": "string", 
+            "description": "channel name to query", 
+            "name": "channel_name", 
+            "in": "query"
+          }
+        ], 
+        "summary": "Connection"
+      }
+    }, 
+    "/qmanager_status": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "MQQmanager", 
+            "schema": {
+              "$ref": "#/definitions/qmanager_status"
+            }
+          }, 
+          "500": {
+            "description": "Unexpected error", 
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }, 
+        "tags": [
+          "qmanager"
+        ], 
+        "description": "get a qmanager status\n", 
+        "parameters": [
+          {
+            "required": true, 
+            "type": "string", 
+            "description": "The name of the qmgr to retreive", 
+            "name": "qmgr_name", 
+            "in": "query"
+          }
+        ], 
+        "summary": "Queue Manager Status"
+      }
+    }, 
+    "/channel_status": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Channel list", 
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/channel_status"
+              }, 
+              "type": "array"
+            }
+          }, 
+          "500": {
+            "description": "Unexpected error", 
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }, 
+        "tags": [
+          "channel"
+        ], 
+        "description": "get queues\n", 
+        "parameters": [
+          {
+            "required": true, 
+            "type": "string", 
+            "description": "The name of the qmgr to retreive", 
+            "name": "qmgr_name", 
+            "in": "query"
+          }, 
+          {
+            "required": false, 
+            "type": "string", 
+            "description": "channel name to query", 
+            "name": "name", 
+            "in": "query"
+          }, 
+          {
+            "required": false, 
+            "type": "string", 
+            "description": "type of channel", 
+            "name": "type", 
+            "in": "query"
+          }
+        ], 
+        "summary": "Channel Status"
+      }
+    }, 
+    "/channel": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Channel list", 
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/channel"
+              }, 
+              "type": "array"
+            }
+          }, 
+          "500": {
+            "description": "Unexpected error", 
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }, 
+        "tags": [
+          "channel"
+        ], 
+        "description": "get channels\n", 
+        "parameters": [
+          {
+            "required": true, 
+            "type": "string", 
+            "description": "The name of the qmanager to retreive", 
+            "name": "qmgr_name", 
+            "in": "query"
+          }, 
+          {
+            "required": false, 
+            "type": "string", 
+            "description": "channel name to query", 
+            "name": "name", 
+            "in": "query"
+          }, 
+          {
+            "required": false, 
+            "type": "string", 
+            "description": "type of channel", 
+            "name": "type", 
+            "in": "query"
+          }
+        ], 
+        "summary": "Channel"
+      }
+    }, 
+    "/qmanager": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "MQQmanager", 
+            "schema": {
+              "$ref": "#/definitions/qmanager"
+            }
+          }, 
+          "500": {
+            "description": "Unexpected error", 
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }, 
+        "tags": [
+          "qmanager"
+        ], 
+        "description": "get a qmanager\n", 
+        "parameters": [
+          {
+            "required": true, 
+            "type": "string", 
+            "description": "The name of the qmgr to retreive", 
+            "name": "qmgr_name", 
+            "in": "query"
+          }
+        ], 
+        "summary": "Queue Managers"
+      }
+    }, 
+    "/queue": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "MQQmanager", 
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/queue"
+              }, 
+              "type": "array"
+            }
+          }, 
+          "500": {
+            "description": "Unexpected error", 
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }, 
+        "tags": [
+          "queue"
+        ], 
+        "description": "get queues\n", 
+        "parameters": [
+          {
+            "required": true, 
+            "type": "string", 
+            "description": "The name of the qmgr to retreive", 
+            "name": "qmgr_name", 
+            "in": "query"
+          }, 
+          {
+            "required": false, 
+            "type": "string", 
+            "description": "queue name to query", 
+            "name": "name", 
+            "in": "query"
+          }, 
+          {
+            "required": false, 
+            "type": "string", 
+            "description": "type of queue", 
+            "name": "type", 
+            "in": "query"
+          }
+        ], 
+        "summary": "Queues"
+      }
+    }, 
+    "/cluster_qmanager": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Channel list", 
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/cluster_qmanager"
+              }, 
+              "type": "array"
+            }
+          }, 
+          "500": {
+            "description": "Unexpected error", 
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }, 
+        "tags": [
+          "cluster"
+        ], 
+        "description": "get queues\n", 
+        "parameters": [
+          {
+            "required": true, 
+            "type": "string", 
+            "description": "The name of the qmgr to retreive", 
+            "name": "qmgr_name", 
+            "in": "query"
+          }, 
+          {
+            "description": "cluster name to query", 
+            "default": "*", 
+            "required": false, 
+            "in": "query", 
+            "type": "string", 
+            "name": "name"
+          }
+        ], 
+        "summary": "Cluster Queue Manager"
+      }
+    }
+  }, 
+  "produces": [
+    "application/json"
+  ], 
+  "basePath": "/mqpcf/v1", 
+  "definitions": {
+    "qmanager_status": {
+      "properties": {
+        "current_log_extent_name": {
+          "type": "string"
+        }, 
+        "installation_desc": {
+          "type": "string"
+        }, 
+        "installation_path": {
+          "type": "string"
+        }, 
+        "chinit_status": {
+          "type": "integer"
+        }, 
+        "q_mgr_name": {
+          "type": "string"
+        }, 
+        "q_mgr_status": {
+          "type": "integer"
+        }, 
+        "log_path": {
+          "type": "string"
+        }, 
+        "restart_log_extent_name": {
+          "type": "string"
+        }, 
+        "media_log_extent_name": {
+          "type": "string"
+        }, 
+        "permit-standby": {
+          "type": "integer"
+        }, 
+        "q_mgr_start_date": {
+          "type": "string"
+        }, 
+        "cmd_server_status": {
+          "type": "integer"
+        }, 
+        "connection_count": {
+          "type": "integer"
+        }, 
+        "q_mgr_start_time": {
+          "type": "string"
+        }, 
+        "installation-name": {
+          "type": "string"
+        }
+      }
+    }, 
+    "queue_status": {
+      "properties": {
+        "oldest_msg_age": {
+          "type": "integer"
+        }, 
+        "monitoring_q": {
+          "type": "integer"
+        }, 
+        "q_status_type": {
+          "type": "integer"
+        }, 
+        "open_input_count": {
+          "type": "integer"
+        }, 
+        "open_output_count": {
+          "type": "integer"
+        }, 
+        "media_log_extent_name": {
+          "type": "string"
+        }, 
+        "last_get_date": {
+          "type": "string"
+        }, 
+        "q_name": {
+          "type": "string"
+        }, 
+        "uncommitted_msgs": {
+          "type": "integer"
+        }, 
+        "q_time_indicator": {
+          "type": "integer"
+        }, 
+        "last_put_date": {
+          "type": "string"
+        }, 
+        "current_q_depth": {
+          "type": "integer"
+        }, 
+        "last_put_time": {
+          "type": "string"
+        }, 
+        "last_get_time": {
+          "type": "string"
+        }
+      }
+    }, 
+    "qmanager": {
+      "properties": {
+        "alteration_date": {
+          "type": "string"
+        }, 
+        "xr_capability": {
+          "type": "integer"
+        }, 
+        "clwl_mru_channels": {
+          "type": "integer"
+        }, 
+        "configuration_event": {
+          "type": "integer"
+        }, 
+        "version": {
+          "type": "string"
+        }, 
+        "def_cluster_xmit_q_type": {
+          "type": "integer"
+        }, 
+        "last_used": {
+          "type": "integer"
+        }, 
+        "statistics_auto_clussdr": {
+          "type": "integer"
+        }, 
+        "statistics_channel": {
+          "type": "integer"
+        }, 
+        "monitoring_auto_clussdr": {
+          "type": "integer"
+        }, 
+        "command_level": {
+          "type": "integer"
+        }, 
+        "remote_event": {
+          "type": "integer"
+        }, 
+        "channel_event": {
+          "type": "integer"
+        }, 
+        "activity_conn_override": {
+          "type": "integer"
+        }, 
+        "local_event": {
+          "type": "integer"
+        }, 
+        "cluster_workload_data": {
+          "type": "string"
+        }, 
+        "coded_char_set_id": {
+          "type": "integer"
+        }, 
+        "statistics_interval": {
+          "type": "integer"
+        }, 
+        "ssl_fips_required": {
+          "type": "integer"
+        }, 
+        "activity_recording": {
+          "type": "integer"
+        }, 
+        "ip_address_version": {
+          "type": "integer"
+        }, 
+        "pubsub_maxmsg_retry_count": {
+          "type": "integer"
+        }, 
+        "statistics_mqi": {
+          "type": "integer"
+        }, 
+        "monitoring_channel": {
+          "type": "integer"
+        }, 
+        "pubsub_np_resp": {
+          "type": "integer"
+        }, 
+        "syncpoint": {
+          "type": "integer"
+        }, 
+        "trigger_interval": {
+          "type": "integer"
+        }, 
+        "channel_auto_def_event": {
+          "type": "integer"
+        }, 
+        "clwl_useq": {
+          "type": "integer"
+        }, 
+        "custom": {
+          "type": "string"
+        }, 
+        "trace_route_recording": {
+          "type": "integer"
+        }, 
+        "platform": {
+          "type": "integer"
+        }, 
+        "alteration_time": {
+          "type": "string"
+        }, 
+        "max_uncommitted_msgs": {
+          "type": "integer"
+        }, 
+        "command_input_q_name": {
+          "type": "string"
+        }, 
+        "ssl_key_repository": {
+          "type": "string"
+        }, 
+        "creation_date": {
+          "type": "string"
+        }, 
+        "accounting_interval": {
+          "type": "integer"
+        }, 
+        "accounting_conn_override": {
+          "type": "integer"
+        }, 
+        "cluster_workload_exit": {
+          "type": "string"
+        }, 
+        "repository_namelist": {
+          "type": "string"
+        }, 
+        "monitoring_q": {
+          "type": "integer"
+        }, 
+        "dead_letter_q_name": {
+          "type": "string"
+        }, 
+        "max_priority": {
+          "type": "integer"
+        }, 
+        "parent": {
+          "type": "string"
+        }, 
+        "activity_trace": {
+          "type": "integer"
+        }, 
+        "ssl_crl_namelist": {
+          "type": "string"
+        }, 
+        "creation_time": {
+          "type": "string"
+        }, 
+        "q_mgr_desc": {
+          "type": "string"
+        }, 
+        "chinit_control": {
+          "type": "integer"
+        }, 
+        "mq_249": {
+          "type": "integer"
+        }, 
+        "pubsub_np_msg": {
+          "type": "integer"
+        }, 
+        "dist_lists": {
+          "type": "integer"
+        }, 
+        "channel_auto_def": {
+          "type": "integer"
+        }, 
+        "accounting_mqi": {
+          "type": "integer"
+        }, 
+        "ssl_crypto_hardware": {
+          "type": "string"
+        }, 
+        "command_event": {
+          "type": "integer"
+        }, 
+        "cmd_server_control": {
+          "type": "integer"
+        }, 
+        "max_msg_length": {
+          "type": "integer"
+        }, 
+        "ssl_event": {
+          "type": "integer"
+        }, 
+        "accounting_q": {
+          "type": "integer"
+        }, 
+        "pubsub_sync_pt": {
+          "type": "integer"
+        }, 
+        "max_handles": {
+          "type": "integer"
+        }, 
+        "pubsub_mode": {
+          "type": "integer"
+        }, 
+        "max_properties_length": {
+          "type": "integer"
+        }, 
+        "repository_name": {
+          "type": "string"
+        }, 
+        "performance_event": {
+          "type": "integer"
+        }, 
+        "suite_b_strength": {
+          "type": "integer"
+        }, 
+        "inhibit_event": {
+          "type": "integer"
+        }, 
+        "q_mgr_name": {
+          "type": "string"
+        }, 
+        "statistics_q": {
+          "type": "integer"
+        }, 
+        "start_stop_event": {
+          "type": "integer"
+        }, 
+        "prot_policy_capability": {
+          "type": "integer"
+        }, 
+        "channel_auto_def_exit": {
+          "type": "string"
+        }, 
+        "authority_event": {
+          "type": "integer"
+        }, 
+        "chlauth_records": {
+          "type": "integer"
+        }, 
+        "cluster_workload_length": {
+          "type": "integer"
+        }, 
+        "q_mgr_identifier": {
+          "type": "string"
+        }, 
+        "logger_event": {
+          "type": "integer"
+        }, 
+        "def_xmit_q_name": {
+          "type": "string"
+        }, 
+        "tree_life_time": {
+          "type": "integer"
+        }, 
+        "ssl_reset_count": {
+          "type": "integer"
+        }, 
+        "msg_mark_browse_interval": {
+          "type": "integer"
+        }
+      }
+    }, 
+    "queue": {
+      "properties": {
+        "alteration_date": {
+          "type": "string"
+        }, 
+        "q_depth_low_limit": {
+          "type": "integer"
+        }, 
+        "open_output_count": {
+          "type": "integer"
+        }, 
+        "open_input_count": {
+          "type": "integer"
+        }, 
+        "q_depth_high_limit": {
+          "type": "integer"
+        }, 
+        "creation_time": {
+          "type": "string"
+        }, 
+        "property_control": {
+          "type": "integer"
+        }, 
+        "accounting_q": {
+          "type": "integer"
+        }, 
+        "def_read_ahead": {
+          "type": "integer"
+        }, 
+        "backout_req_q_name": {
+          "type": "string"
+        }, 
+        "harden_get_backout": {
+          "type": "integer"
+        }, 
+        "clwl_q_rank": {
+          "type": "integer"
+        }, 
+        "clwl_useq": {
+          "type": "integer"
+        }, 
+        "q_depth_low_event": {
+          "type": "integer"
+        }, 
+        "q_desc": {
+          "type": "string"
+        }, 
+        "backout_threshold": {
+          "type": "integer"
+        }, 
+        "trigger_depth": {
+          "type": "integer"
+        }, 
+        "max_msg_length": {
+          "type": "integer"
+        }, 
+        "custom": {
+          "type": "string"
+        }, 
+        "cluster_name": {
+          "type": "string"
+        }, 
+        "shareability": {
+          "type": "integer"
+        }, 
+        "alteration_time": {
+          "type": "string"
+        }, 
+        "initiation_q_name": {
+          "type": "string"
+        }, 
+        "max_q_depth": {
+          "type": "integer"
+        }, 
+        "q_depth_max_event": {
+          "type": "integer"
+        }, 
+        "q_depth_high_event": {
+          "type": "integer"
+        }, 
+        "current_q_depth": {
+          "type": "integer"
+        }, 
+        "msg_delivery_sequence": {
+          "type": "integer"
+        }, 
+        "inhibit_put": {
+          "type": "integer"
+        }, 
+        "q_service_interval": {
+          "type": "integer"
+        }, 
+        "monitoring_q": {
+          "type": "integer"
+        }, 
+        "usage": {
+          "type": "integer"
+        }, 
+        "def_input_open_option": {
+          "type": "integer"
+        }, 
+        "def_priority": {
+          "type": "integer"
+        }, 
+        "q_service_interval_event": {
+          "type": "integer"
+        }, 
+        "process_name": {
+          "type": "string"
+        }, 
+        "trigger_msg_priority": {
+          "type": "integer"
+        }, 
+        "dist_lists": {
+          "type": "integer"
+        }, 
+        "statistics_q": {
+          "type": "integer"
+        }, 
+        "cluster_namelist": {
+          "type": "string"
+        }, 
+        "scope": {
+          "type": "integer"
+        }, 
+        "trigger_control": {
+          "type": "integer"
+        }, 
+        "creation_date": {
+          "type": "string"
+        }, 
+        "retention_interval": {
+          "type": "integer"
+        }, 
+        "q_type": {
+          "type": "integer"
+        }, 
+        "def_persistence": {
+          "type": "integer"
+        }, 
+        "definition_type": {
+          "type": "integer"
+        }, 
+        "inhibit_get": {
+          "type": "integer"
+        }, 
+        "trigger_type": {
+          "type": "integer"
+        }, 
+        "clwl_q_priority": {
+          "type": "integer"
+        }, 
+        "def_put_response_type": {
+          "type": "integer"
+        }, 
+        "q_name": {
+          "type": "string"
+        }, 
+        "clus-chl-name": {
+          "type": "string"
+        }, 
+        "npm_class": {
+          "type": "integer"
+        }, 
+        "def_bind": {
+          "type": "integer"
+        }, 
+        "trigger_data": {
+          "type": "string"
+        }
+      }
+    }, 
+    "connection": {
+      "properties": {
+        "async_state": {
+          "type": "integer"
+        }, 
+        "thread_id": {
+          "type": "integer"
+        }, 
+        "uow_log_start_date": {
+          "type": "string"
+        }, 
+        "uow_log_extent_name": {
+          "type": "string"
+        }, 
+        "external_uow_id": {
+          "type": "string"
+        }, 
+        "uow_state": {
+          "type": "integer"
+        }, 
+        "conn_info_type": {
+          "type": "integer"
+        }, 
+        "uow_start_time": {
+          "type": "string"
+        }, 
+        "uow_log_start_time": {
+          "type": "string"
+        }, 
+        "generic_connection_id": {
+          "type": "string"
+        }, 
+        "appl_tag": {
+          "type": "string"
+        }, 
+        "connection_id": {
+          "type": "string"
+        }, 
+        "q_mgr_uow_id": {
+          "type": "string"
+        }, 
+        "user_identifier": {
+          "type": "string"
+        }, 
+        "process_id": {
+          "type": "integer"
+        }, 
+        "uow_type": {
+          "type": "integer"
+        }, 
+        "uow_start_date": {
+          "type": "string"
+        }, 
+        "appl_desc": {
+          "type": "string"
+        }, 
+        "connection_name": {
+          "type": "string"
+        }, 
+        "channel_name": {
+          "type": "string"
+        }, 
+        "appl_type": {
+          "type": "integer"
+        }, 
+        "connect_options": {
+          "type": "integer"
+        }
+      }
+    }, 
+    "cluster_qmanager": {
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    }, 
+    "Error": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }, 
+        "code": {
+          "type": "integer", 
+          "format": "int32"
+        }, 
+        "reason": {
+          "type": "integer", 
+          "format": "int32"
+        }
+      }
+    }, 
+    "channel_status": {
+      "properties": {
+        "last_used": {
+          "type": "string"
+        }, 
+        "hdr_compression": {
+          "type": "integer"
+        }, 
+        "msgs": {
+          "type": "integer"
+        }, 
+        "compression_rate": {
+          "type": "integer"
+        }, 
+        "remote_product": {
+          "type": "string"
+        }, 
+        "stop_requested": {
+          "type": "integer"
+        }, 
+        "mca_job_name": {
+          "type": "string"
+        }, 
+        "buffers_received": {
+          "type": "integer"
+        }, 
+        "buffers_sent": {
+          "type": "integer"
+        }, 
+        "channel_status": {
+          "type": "integer"
+        }, 
+        "ssl_cert_issuer_name": {
+          "type": "string"
+        }, 
+        "mca_user_id": {
+          "type": "string"
+        }, 
+        "channel_substate": {
+          "type": "integer"
+        }, 
+        "ssl_key_reset_date": {
+          "type": "string"
+        }, 
+        "monitoring_channel": {
+          "type": "integer"
+        }, 
+        "compression_time": {
+          "type": "integer"
+        }, 
+        "exit_time_indicator": {
+          "type": "integer"
+        }, 
+        "last_msg_time": {
+          "type": "string"
+        }, 
+        "local_address": {
+          "type": "string"
+        }, 
+        "remote_appl_tag": {
+          "type": "string"
+        }, 
+        "msg_compression": {
+          "type": "integer"
+        }, 
+        "last_msg_date": {
+          "type": "string"
+        }, 
+        "hb_interval": {
+          "type": "integer"
+        }, 
+        "channel_instance_type": {
+          "type": "integer"
+        }, 
+        "channel_start_time": {
+          "type": "string"
+        }, 
+        "remote_version": {
+          "type": "string"
+        }, 
+        "bytes_rcvd": {
+          "type": "integer"
+        }, 
+        "max_sharing_convs": {
+          "type": "integer"
+        }, 
+        "current_sharing_convs": {
+          "type": "integer"
+        }, 
+        "bytes_sent": {
+          "type": "integer"
+        }, 
+        "connection_name": {
+          "type": "string"
+        }, 
+        "channel_type": {
+          "type": "integer"
+        }, 
+        "channel_name": {
+          "type": "string"
+        }, 
+        "mca_status": {
+          "type": "integer"
+        }, 
+        "channel_start_date": {
+          "type": "string"
+        }, 
+        "ssl_key_resets": {
+          "type": "integer"
+        }, 
+        "ssl_short_peer_name": {
+          "type": "string"
+        }
+      }
+    }, 
+    "channel": {
+      "properties": {
+        "alteration_date": {
+          "type": "string"
+        }, 
+        "hdr_compression": {
+          "type": "integer"
+        }, 
+        "rcv_exit_user_data": {
+          "type": "string"
+        }, 
+        "mr_count": {
+          "type": "integer"
+        }, 
+        "mr_interval": {
+          "type": "integer"
+        }, 
+        "ssl_client_auth": {
+          "type": "integer"
+        }, 
+        "mr_exit_name": {
+          "type": "string"
+        }, 
+        "statistics_channel": {
+          "type": "integer"
+        }, 
+        "send_exit_name": {
+          "type": "string"
+        }, 
+        "put_authority": {
+          "type": "integer"
+        }, 
+        "mca_user_id": {
+          "type": "string"
+        }, 
+        "rcv_exit_name": {
+          "type": "string"
+        }, 
+        "monitoring_channel": {
+          "type": "integer"
+        }, 
+        "msg_exit_user_data": {
+          "type": "string"
+        }, 
+        "use-dead-letter-q": {
+          "type": "integer"
+        }, 
+        "max_msg_length": {
+          "type": "integer"
+        }, 
+        "msg_exit_name": {
+          "type": "string"
+        }, 
+        "alteration_time": {
+          "type": "string"
+        }, 
+        "mr_exit_user_data": {
+          "type": "string"
+        }, 
+        "ssl_cipher_spec": {
+          "type": "string"
+        }, 
+        "ssl_peer_name": {
+          "type": "string"
+        }, 
+        "msg_compression": {
+          "type": "integer"
+        }, 
+        "keep_alive_interval": {
+          "type": "integer"
+        }, 
+        "hb_interval": {
+          "type": "integer"
+        }, 
+        "batch_size": {
+          "type": "integer"
+        }, 
+        "send_exit_user_data": {
+          "type": "string"
+        }, 
+        "desc": {
+          "type": "string"
+        }, 
+        "sequence_number_wrap": {
+          "type": "integer"
+        }, 
+        "sec_exit_user_data": {
+          "type": "string"
+        }, 
+        "sec_exit_name": {
+          "type": "string"
+        }, 
+        "npm_speed": {
+          "type": "integer"
+        }, 
+        "channel_type": {
+          "type": "integer"
+        }, 
+        "channel_name": {
+          "type": "string"
+        }, 
+        "reset_requested": {
+          "type": "integer"
+        }, 
+        "first": {
+          "type": "integer"
+        }
+      }
+    }
+  }, 
+  "swagger": "2.0"
+}

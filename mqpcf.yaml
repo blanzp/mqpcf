@@ -1,0 +1,803 @@
+#
+swagger: '2.0'
+info:
+  title: MQ PCF
+  description: Query MQ PCF
+  version: "1.0.0"
+# the domain of the service
+host: go
+# array of all schemes that your API supports
+schemes:
+  - http
+# will be prefixed to all paths
+basePath: /mqpcf/v1
+produces:
+  - application/json
+paths:
+  /qmanager:
+    get:
+      summary: Queue Managers
+      description: |
+        get a qmanager
+      parameters:
+        - name: qmgr_name
+          in: query
+          required: true
+          description: The name of the qmgr to retreive
+          type: string
+      tags:
+        - qmanager
+      responses:
+        200:
+          description: MQQmanager
+          schema:
+              $ref: '#/definitions/qmanager'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /qmanager_status:
+    get:
+      summary: Queue Manager Status
+      description: |
+        get a qmanager status
+      parameters:
+        - name: qmgr_name
+          in: query
+          required: true
+          description: The name of the qmgr to retreive
+          type: string
+      tags:
+        - qmanager
+      responses:
+        200:
+          description: MQQmanager
+          schema:
+              $ref: '#/definitions/qmanager_status'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /queue:
+    get:
+      summary: Queues
+      description: |
+        get queues
+      parameters:
+        - name: qmgr_name
+          in: query
+          required: true
+          description: The name of the qmgr to retreive
+          type: string
+        - name: name
+          in: query
+          required: false
+          description: queue name to query
+          type: string
+        - name: type
+          in: query
+          required: false
+          description: type of queue
+          type: string
+      tags:
+        - queue
+      responses:
+        200:
+          description: MQQmanager
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/queue'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /queue_status:
+    get:
+      summary: Queue Status
+      description: |
+        get queues
+      parameters:
+        - name: qmgr_name
+          in: query
+          required: true
+          description: The name of the qmgr to retreive
+          type: string
+        - name: name
+          in: query
+          required: false
+          description: queue name to query
+          type: string
+      tags:
+        - queue
+      responses:
+        200:
+          description: MQQmanager
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/queue_status'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /connection:
+    get:
+      summary: Connection
+      description: |
+        get connection
+      parameters:
+        - name: qmgr_name
+          in: query
+          required: true
+          description: The name of the qmgr to retreive
+          type: string
+        - name: channel_name
+          in: query
+          required: false
+          description: channel name to query
+          type: string
+      tags:
+        - connection
+      responses:
+        200:
+          description: MQConnection
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/connection'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /channel:
+    get:
+      summary: Channel
+      description: |
+        get channels
+      parameters:
+        - name: qmgr_name
+          in: query
+          required: true
+          description: The name of the qmanager to retreive
+          type: string
+        - name: name
+          in: query
+          required: false
+          description: channel name to query
+          type: string
+        - name: type
+          in: query
+          required: false
+          description: type of channel
+          type: string
+      tags:
+        - channel
+      responses:
+        200:
+          description: Channel list
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/channel'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /channel_status:
+    get:
+      summary: Channel Status
+      description: |
+        get queues
+      parameters:
+        - name: qmgr_name
+          in: query
+          required: true
+          description: The name of the qmgr to retreive
+          type: string
+        - name: name
+          in: query
+          required: false
+          description: channel name to query
+          type: string
+        - name: type
+          in: query
+          required: false
+          description: type of channel
+          type: string
+      tags:
+        - channel
+      responses:
+        200:
+          description: Channel list
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/channel_status'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /cluster_qmanager:
+    get:
+      summary: Cluster Queue Manager
+      description: |
+        get queues
+      parameters:
+        - name: qmgr_name
+          in: query
+          required: true
+          description: The name of the qmgr to retreive
+          type: string
+        - name: name
+          in: query
+          required: false
+          description: cluster name to query
+          default: '*'
+          type: string
+      tags:
+        - cluster
+      responses:
+        200:
+          description: Channel list
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/cluster_qmanager'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  qmanager:
+    properties:
+      mq_249:
+          type: integer
+      accounting_conn_override:
+          type: integer
+      accounting_interval:
+          type: integer
+      accounting_mqi:
+          type: integer
+      accounting_q:
+          type: integer
+      activity_conn_override:
+          type: integer
+      activity_recording:
+          type: integer
+      activity_trace:
+          type: integer
+      alteration_date:
+          type: string
+      alteration_time:
+          type: string
+      authority_event:
+          type: integer
+      channel_auto_def:
+          type: integer
+      channel_auto_def_event:
+          type: integer
+      channel_auto_def_exit:
+          type: string
+      channel_event:
+          type: integer
+      chinit_control:
+          type: integer
+      chlauth_records:
+          type: integer
+      cluster_workload_data:
+          type: string
+      cluster_workload_exit:
+          type: string
+      cluster_workload_length:
+          type: integer
+      clwl_mru_channels:
+          type: integer
+      clwl_useq:
+          type: integer
+      cmd_server_control:
+          type: integer
+      coded_char_set_id:
+          type: integer
+      command_event:
+          type: integer
+      command_input_q_name:
+          type: string
+      command_level:
+          type: integer
+      configuration_event:
+          type: integer
+      creation_date:
+          type: string
+      creation_time:
+          type: string
+      custom:
+          type: string
+      dead_letter_q_name:
+          type: string
+      def_cluster_xmit_q_type:
+          type: integer
+      def_xmit_q_name:
+          type: string
+      dist_lists:
+          type: integer
+      inhibit_event:
+          type: integer
+      ip_address_version:
+          type: integer
+      last_used:
+          type: integer
+      local_event:
+          type: integer
+      logger_event:
+          type: integer
+      max_handles:
+          type: integer
+      max_msg_length:
+          type: integer
+      max_priority:
+          type: integer
+      max_properties_length:
+          type: integer
+      max_uncommitted_msgs:
+          type: integer
+      monitoring_auto_clussdr:
+          type: integer
+      monitoring_channel:
+          type: integer
+      monitoring_q:
+          type: integer
+      msg_mark_browse_interval:
+          type: integer
+      parent:
+          type: string
+      performance_event:
+          type: integer
+      platform:
+          type: integer
+      prot_policy_capability:
+          type: integer
+      pubsub_maxmsg_retry_count:
+          type: integer
+      pubsub_mode:
+          type: integer
+      pubsub_np_msg:
+          type: integer
+      pubsub_np_resp:
+          type: integer
+      pubsub_sync_pt:
+          type: integer
+      q_mgr_desc:
+          type: string
+      q_mgr_identifier:
+          type: string
+      q_mgr_name:
+          type: string
+      remote_event:
+          type: integer
+      repository_name:
+          type: string
+      repository_namelist:
+          type: string
+      ssl_crl_namelist:
+          type: string
+      ssl_crypto_hardware:
+          type: string
+      ssl_event:
+          type: integer
+      ssl_fips_required:
+          type: integer
+      ssl_key_repository:
+          type: string
+      ssl_reset_count:
+          type: integer
+      start_stop_event:
+          type: integer
+      statistics_auto_clussdr:
+          type: integer
+      statistics_channel:
+          type: integer
+      statistics_interval:
+          type: integer
+      statistics_mqi:
+          type: integer
+      statistics_q:
+          type: integer
+      suite_b_strength:
+          type: integer
+      syncpoint:
+          type: integer
+      trace_route_recording:
+          type: integer
+      tree_life_time:
+          type: integer
+      trigger_interval:
+          type: integer
+      version:
+          type: string
+      xr_capability:
+          type: integer
+  qmanager_status:
+    properties:
+      chinit_status:
+          type: integer
+      cmd_server_status:
+          type: integer
+      connection_count:
+          type: integer
+      current_log_extent_name:
+          type: string
+      installation-name:
+          type: string
+      installation_desc:
+          type: string
+      installation_path:
+          type: string
+      log_path:
+          type: string
+      media_log_extent_name:
+          type: string
+      permit-standby:
+          type: integer
+      q_mgr_name:
+          type: string
+      q_mgr_start_date:
+          type: string
+      q_mgr_start_time:
+          type: string
+      q_mgr_status:
+          type: integer
+      restart_log_extent_name:
+          type: string
+  queue:
+    properties:
+        accounting_q:
+            type: integer
+        alteration_date:
+            type: string
+        alteration_time:
+            type: string
+        backout_req_q_name:
+            type: string
+        backout_threshold:
+            type: integer
+        clus-chl-name:
+            type: string
+        cluster_name:
+            type: string
+        cluster_namelist:
+            type: string
+        clwl_q_priority:
+            type: integer
+        clwl_q_rank:
+            type: integer
+        clwl_useq:
+            type: integer
+        creation_date:
+            type: string
+        creation_time:
+            type: string
+        current_q_depth:
+            type: integer
+        custom:
+            type: string
+        def_bind:
+            type: integer
+        def_input_open_option:
+            type: integer
+        def_persistence:
+            type: integer
+        def_priority:
+            type: integer
+        def_put_response_type:
+            type: integer
+        def_read_ahead:
+            type: integer
+        definition_type:
+            type: integer
+        dist_lists:
+            type: integer
+        harden_get_backout:
+            type: integer
+        inhibit_get:
+            type: integer
+        inhibit_put:
+            type: integer
+        initiation_q_name:
+            type: string
+        max_msg_length:
+            type: integer
+        max_q_depth:
+            type: integer
+        monitoring_q:
+            type: integer
+        msg_delivery_sequence:
+            type: integer
+        npm_class:
+            type: integer
+        open_input_count:
+            type: integer
+        open_output_count:
+            type: integer
+        process_name:
+            type: string
+        property_control:
+            type: integer
+        q_depth_high_event:
+            type: integer
+        q_depth_high_limit:
+            type: integer
+        q_depth_low_event:
+            type: integer
+        q_depth_low_limit:
+            type: integer
+        q_depth_max_event:
+            type: integer
+        q_desc:
+            type: string
+        q_name:
+            type: string
+        q_service_interval:
+            type: integer
+        q_service_interval_event:
+            type: integer
+        q_type:
+            type: integer
+        retention_interval:
+            type: integer
+        scope:
+            type: integer
+        shareability:
+            type: integer
+        statistics_q:
+            type: integer
+        trigger_control:
+            type: integer
+        trigger_data:
+            type: string
+        trigger_depth:
+            type: integer
+        trigger_msg_priority:
+            type: integer
+        trigger_type:
+            type: integer
+        usage:
+            type: integer
+  queue_status:
+    properties:
+      current_q_depth:
+        type: integer
+      last_get_date:
+        type: string
+      last_get_time:
+        type: string
+      last_put_date:
+        type: string
+      last_put_time:
+        type: string
+      media_log_extent_name:
+        type: string
+      monitoring_q:
+        type: integer
+      oldest_msg_age:
+        type: integer
+      open_input_count:
+        type: integer
+      open_output_count:
+        type: integer
+      q_name:
+        type: string
+      q_status_type:
+        type: integer
+      q_time_indicator:
+        type: integer
+      uncommitted_msgs:
+        type: integer
+  channel:
+    properties:
+      alteration_date:
+        type: string
+      alteration_time:
+        type: string
+      batch_size:
+        type: integer
+      channel_name:
+        type: string
+      channel_type:
+        type: integer
+      desc:
+        type: string
+      first:
+        type: integer
+      hb_interval:
+        type: integer
+      hdr_compression:
+        type: integer
+      keep_alive_interval:
+        type: integer
+      max_msg_length:
+        type: integer
+      mca_user_id:
+        type: string
+      monitoring_channel:
+        type: integer
+      mr_count:
+        type: integer
+      mr_exit_name:
+        type: string
+      mr_exit_user_data:
+        type: string
+      mr_interval:
+        type: integer
+      msg_compression:
+        type: integer
+      msg_exit_name:
+        type: string
+      msg_exit_user_data:
+        type: string
+      npm_speed:
+        type: integer
+      put_authority:
+        type: integer
+      rcv_exit_name:
+        type: string
+      rcv_exit_user_data:
+        type: string
+      reset_requested:
+        type: integer
+      sec_exit_name:
+        type: string
+      sec_exit_user_data:
+        type: string
+      send_exit_name:
+        type: string
+      send_exit_user_data:
+        type: string
+      sequence_number_wrap:
+        type: integer
+      ssl_cipher_spec:
+        type: string
+      ssl_client_auth:
+        type: integer
+      ssl_peer_name:
+        type: string
+      statistics_channel:
+        type: integer
+      use-dead-letter-q:
+        type: integer
+  channel_status:
+    properties:
+      buffers_received:
+        type: integer
+      buffers_sent:
+        type: integer
+      bytes_rcvd:
+        type: integer
+      bytes_sent:
+        type: integer
+      channel_instance_type:
+        type: integer
+      channel_name:
+        type: string
+      channel_start_date:
+        type: string
+      channel_start_time:
+        type: string
+      channel_status:
+        type: integer
+      channel_substate:
+        type: integer
+      channel_type:
+        type: integer
+      compression_rate:
+        type: integer
+      compression_time:
+        type: integer
+      connection_name:
+        type: string
+      current_sharing_convs:
+        type: integer
+      exit_time_indicator:
+        type: integer
+      hb_interval:
+        type: integer
+      hdr_compression:
+        type: integer
+      last_msg_date:
+        type: string
+      last_msg_time:
+        type: string
+      last_used:
+        type: string
+      local_address:
+        type: string
+      max_sharing_convs:
+        type: integer
+      mca_job_name:
+        type: string
+      mca_status:
+        type: integer
+      mca_user_id:
+        type: string
+      monitoring_channel:
+        type: integer
+      msg_compression:
+        type: integer
+      msgs:
+        type: integer
+      remote_appl_tag:
+        type: string
+      remote_product:
+        type: string
+      remote_version:
+        type: string
+      ssl_cert_issuer_name:
+        type: string
+      ssl_key_reset_date:
+        type: string
+      ssl_key_resets:
+        type: integer
+      ssl_short_peer_name:
+        type: string
+      stop_requested:
+        type: integer
+  connection:
+    properties:
+      appl_desc:
+        type: string
+      appl_tag:
+        type: string
+      appl_type:
+        type: integer
+      async_state:
+        type: integer
+      channel_name:
+        type: string
+      conn_info_type:
+        type: integer
+      connect_options:
+        type: integer
+      connection_id:
+        type: string
+      connection_name:
+        type: string
+      external_uow_id:
+        type: string
+      generic_connection_id:
+        type: string
+      process_id:
+        type: integer
+      q_mgr_uow_id:
+        type: string
+      thread_id:
+        type: integer
+      uow_log_extent_name:
+        type: string
+      uow_log_start_date:
+        type: string
+      uow_log_start_time:
+        type: string
+      uow_start_date:
+        type: string
+      uow_start_time:
+        type: string
+      uow_state:
+        type: integer
+      uow_type:
+        type: integer
+      user_identifier:
+        type: string
+  cluster_qmanager:
+    properties:
+      name:
+        type: string
+  Error:
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      reason:
+        type: integer
+        format: int32
