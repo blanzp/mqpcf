@@ -2,8 +2,14 @@
 # REST interface abstraction over MQSeries PCF
 
 [MQ PCF] [1] is the administration API for MQSeries.  This is a [Flask Restful] [2] rest service that
- implements a [Swagger] [2] defined API.  The API can be tested using the included [Swagger UI] [4]. The code is generated 
- with [Swagger codegen] [5]
+ implements a [Swagger] [2] defined API.  The API can be tested using the included [Swagger UI] [4].
+The code is generated with [Swagger codegen] [5].  
+
+Code can be regenerated after any API change with (this command will not overwrite your classes)  :
+> swagger_py_codegen --swagger mqpcf.yaml --ui --spec mqpcf
+
+The swagger ui is found at:
+> \<base_url\>/static/swagger_ui/index.hml
 
 [1]: http://www-01.ibm.com/support/knowledgecenter/SSFKSJ_7.0.1/com.ibm.mq.csqzac.doc/pc10600_.htm?lang=en "PCF Commands" 
 [2]: https://flask-restful.readthedocs.org/en/0.3.4/ "Flask Restful"
