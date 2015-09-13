@@ -13,9 +13,6 @@ class Resource(restful.Resource):
 
 
 class MQConnectionCache(object):
-    servers=[{"qmgr":'TESTQM1', "channel":'SYSTEM.DEF.SVRCONN', "ip":"127.0.0.1(1414)"},
-         {"qmgr":'TESTQM2', "channel":'SYSTEM.DEF.SVRCONN', "ip":"127.0.0.1(1415)"},
-         {"qmgr":'TESTQM3', "channel":'SYSTEM.DEF.SVRCONN', "ip":"127.0.0.1(1416)"}]
 
     def __init__(self):
         self.cache = dict()
@@ -38,9 +35,14 @@ class MQConnectionCache(object):
         self.cache[qmgr_name] = conn
         return conn
 
+    # TODO replace with rest call to inventory service
     @staticmethod
     def get_connection(qmgr_name):
-        hit = filter(lambda x: x['qmgr'] == qmgr_name, MQConnectionCache.servers)
+        servers=[{"qmgr":'TESTQM1', "channel":'SYSTEM.DEF.SVRCONN', "ip":"127.0.0.1(1414)"},
+                 {"qmgr":'TESTQM2', "channel":'SYSTEM.DEF.SVRCONN', "ip":"127.0.0.1(1415)"},
+                 {"qmgr":'TESTQM3', "channel":'SYSTEM.DEF.SVRCONN', "ip":"127.0.0.1(1416)"}]
+
+        hit = filter(lambda x: x['qmgr'] == qmgr_name, servers)
         if len(hit):
             hit = hit[0]
             print "connecting to", qmgr_name
